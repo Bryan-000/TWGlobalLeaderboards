@@ -1,16 +1,18 @@
 ﻿namespace TWGlobalLeaderboards;
 
 using BepInEx;
-using HarmonyLib;
 
-/// <summary> General plugin handler. </summary>
 [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
 public class Plugin : BaseUnityPlugin
 {
-    /// <summary> Load the mod. </summary>
     public void Awake()
     {
-        // loading code
-        new Harmony(PluginInfo.GUID).PatchAll();
+    }
+
+    public class PluginInfo
+    {
+        public const string GUID = "Bryan_-000-.TWGlobalLeaderboards";
+        public const string Name = "TWGlobalLeaderboards";
+        public const string Version = "1.0.0";
     }
 }
