@@ -1,6 +1,7 @@
 ﻿namespace TWGlobalLeaderboards;
 
 using System;
+using Steamworks;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,8 +13,19 @@ public static class UIPatches
     [HarmonyPostfix] [HarmonyPatch(typeof(ModsConfigHelper), "Start")]
     public static void CreateButtons(ModsConfigHelper __instance)
     {
-        __instance.CreateTitle("Leaderboard Mode:");
-        __instance.CreateSlider();
+        LeaderboardDataRequest currentVal = PrefsManager.Get("GlobalLeaderboards.mode", LeaderboardDataRequest.GlobalAroundUser);
+
+        Text txt = __instance.CreateTitle("Leaderboard Mode: " + currentVal.ToString());
+        Slider slider = __instance.CreateSlider(0, 2, (int)currentVal);
+        slider.onValueChanged.AddListener((val) =>
+        {
+            int intValue = Mathf.RoundToInt(val);
+            var value = (LeaderboardDataRequest)intValue;
+
+            slider.value = intValue;
+            txt.text = "Leaderboard Mode: " + value.ToString();
+            PrefsManager.Set("GlobalLeaderboards.mode", value);
+        });
     }
 
     // DUVIZZ FUCKING G LOCCK IINNNNN
@@ -31,14 +43,15 @@ public static class UIPatches
         public Slider CreateSlider(float min = 0f, float max = 100f, float startingValue = 0f)
         {
             (GameObject obj, Slider slider) = help.CreateSlider();
-            slider.value = startingValue;
             slider.minValue = min;
             slider.maxValue = max;
+            slider.value = startingValue;
 
             return slider;
         }
 
-        public GameObject CreateTitle(string text = "Example Title") =>
-            help.CreateButton(text); // for some reason this is called createbutton even tho its meant to be create title
+        // for some reason this is called createbutton even tho its meant to be create title
+        public Text CreateTitle(string text = "Example Title") =>
+            help.CreateButton(text).GetComponentInChildren<Text>();
     }
 }

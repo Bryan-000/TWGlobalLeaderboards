@@ -21,14 +21,18 @@
 	<ItemGroup>
 		<!-- Nuget Packages -->
 		<PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.3" />
 		<PackageReference Include="UnityEngine.Modules" Version="2022.3.29" IncludeAssets="compile" />
 
 		<!-- Assemblies via Managed -->
-		<Reference Include="Assembly-Game">
+		<Reference Include="Assembly-Game" Publicize="true">
 			<HintPath>$(ManagedPath)\Assembly-Game.dll</HintPath>
 		</Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>$(ManagedPath)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks" Publicize="true">
+      <HintPath>$(ManagedPath)\Facepunch.Steamworks.Win64.dll</HintPath>
     </Reference>
 	</ItemGroup>
 
