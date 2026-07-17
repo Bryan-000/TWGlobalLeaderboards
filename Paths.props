@@ -4,7 +4,7 @@
 		<ThisWeekPath>C:\Program Files (x86)\Steam\steamapps\common\This Week Demo</ThisWeekPath>
 
 		<!-- You shouldn't need to touch these. If you do, ask me about it on discord @fredayddd321ewq -->
-		<ManagedPath>$(ThisWeekPath)\ULTRAKILL_Data\Managed</ManagedPath>
+		<ManagedPath>$(ThisWeekPath)\ThisWeek_Data\Managed</ManagedPath>
 		<PluginPath>$(ThisWeekPath)\BepInEx\plugins</PluginPath>
 
 		<!-- This is the path where the DLL is copied too, if you have it in a different folder or something then add the name of that folder onto here. -->
